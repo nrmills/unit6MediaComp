@@ -1,102 +1,145 @@
 public class IntArrayWorker
 {
-  /** two dimensional matrix */
-  private int[][] matrix = null;
-  
-  /** set the matrix to the passed one
-    * @param theMatrix the one to use
-    */
-  public void setMatrix(int[][] theMatrix)
-  {
-    matrix = theMatrix;
-  }
-  
-  /**
-   * Method to return the total 
-   * @return the total of the values in the array
-   */
-  public int getTotal()
-  {
-    int total = 0;
-    for (int row = 0; row < matrix.length; row++)
+    /** two dimensional matrix */
+    private int[][] matrix = null;
+
+    /** set the matrix to the passed one
+     * @param theMatrix the one to use
+     */
+    public void setMatrix(int[][] theMatrix)
     {
-      for (int col = 0; col < matrix[0].length; col++)
-      {
-        total = total + matrix[row][col];
-      }
+        matrix = theMatrix;
     }
-    return total;
-  }
-  
-  /**
-   * Method to return the total using a nested for-each loop
-   * @return the total of the values in the array
-   */
-  public int getTotalNested()
-  {
-    int total = 0;
-    for (int[] rowArray : matrix)
+
+    /**
+     * Method to return the total 
+     * @return the total of the values in the array
+     */
+    public int getTotal()
     {
-      for (int item : rowArray)
-      {
-        total = total + item;
-      }
+        int total = 0;
+        for (int row = 0; row < matrix.length; row++)
+        {
+            for (int col = 0; col < matrix[0].length; col++)
+            {
+                total = total + matrix[row][col];
+            }
+        }
+        return total;
     }
-    return total;
-  }
-  
-  /**
-   * Method to fill with an increasing count
-   */
-  public void fillCount()
-  {
-    int numCols = matrix[0].length;
-    int count = 1;
-    for (int row = 0; row < matrix.length; row++)
+
+    public int getCount( int value )
     {
-      for (int col = 0; col < numCols; col++)
-      {
-        matrix[row][col] = count;
-        count++;
-      }
+        int total = 0;
+        for( int row = 0; row < matrix.length; row++ )
+        {
+            for( int col = 0; col < matrix[0].length; col++ )
+            {
+                if( matrix[row][col] == value )
+                {
+                    total++;
+                }
+            }
+        }
+        return total;
     }
-  }
-  
-  /**
-   * print the values in the array in rows and columns
-   */
-  public void print()
-  {
-    for (int row = 0; row < matrix.length; row++)
+
+    public int getLargest()
     {
-      for (int col = 0; col < matrix[0].length; col++)
-      {
-        System.out.print( matrix[row][col] + " " );
-      }
-      System.out.println();
+        int lastNum = 0;
+        int biggestNum = 0;
+        for( int row = 0; row < matrix.length; row++ )
+        {
+            for( int col = 0; col < matrix[0].length; col++ )
+            {
+                lastNum = matrix[row][col];
+                if( lastNum > biggestNum )
+                {
+                    biggestNum = lastNum;
+                }
+            }
+        }
+        return biggestNum;
     }
-    System.out.println();
-  }
-  
-  
-  /** 
-   * fill the array with a pattern
-   */
-  public void fillPattern1()
-  {
-    for (int row = 0; row < matrix.length; row++)
+
+    public int getColTotal( int colNum)
     {
-      for (int col = 0; col < matrix[0].length; 
-           col++)
-      {
-        if (row < col)
-          matrix[row][col] = 1;
-        else if (row == col)
-          matrix[row][col] = 2;
-        else
-          matrix[row][col] = 3;
-      }
+        int total = 0;
+        for( int row = 0; row < matrix.length; row++ )
+        {    
+            total += matrix[row][colNum];
+        }
+        return total;
     }
-  }
- 
+
+    /**
+     * Method to return the total using a nested for-each loop
+     * @return the total of the values in the array
+     */
+    public int getTotalNested()
+    {
+        int total = 0;
+        for (int[] rowArray : matrix)
+        {
+            for (int item : rowArray)
+            {
+                total = total + item;
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Method to fill with an increasing count
+     */
+    public void fillCount()
+    {
+        int numCols = matrix[0].length;
+        int count = 1;
+        for (int row = 0; row < matrix.length; row++)
+        {
+            for (int col = 0; col < numCols; col++)
+            {
+                matrix[row][col] = count;
+                count++;
+            }
+        }
+    }
+
+    /**
+     * print the values in the array in rows and columns
+     */
+    public void print()
+    {
+        for (int row = 0; row < matrix.length; row++)
+        {
+            for (int col = 0; col < matrix[0].length; col++)
+            {
+                System.out.print( matrix[row][col] + " " );
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /** 
+     * fill the array with a pattern
+     */
+    public void fillPattern1()
+    {
+        for (int row = 0; row < matrix.length; row++)
+        {
+            for (int col = 0; col < matrix[0].length; 
+            col++)
+            {
+                if (row < col)
+                    matrix[row][col] = 1;
+                else if (row == col)
+                    matrix[row][col] = 2;
+                else
+                    matrix[row][col] = 3;
+            }
+        }
+    }
+
 }
