@@ -8,12 +8,45 @@
  */
 public class PictureTester
 {
+    
+    public static void testGrayScale()
+    {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.grayScale();
+        beach.explore();
+    }
+    
+    public static void testNegate()
+    {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.negate();
+        beach.explore();
+    }
+    
+    public static void testFixUnderwater()
+    {
+        Picture water = new Picture("water.jpg");
+        water.explore();
+        water.fixUnderwater();
+        water.explore();
+    }
+    
     /** Method to test zeroBlue */
     public static void testZeroBlue()
     {
         Picture beach = new Picture("beach.jpg");
         beach.explore();
         beach.zeroBlue();
+        beach.explore();
+    }
+    
+    public static void testKeepOnlyBlue()
+    {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.keepOnlyBlue();
         beach.explore();
     }
 
@@ -95,14 +128,14 @@ public class PictureTester
         //testKeepOnlyRed();
         //testKeepOnlyGreen();
         //testNegate();
-        //testGrayscale();
-        //testFixUnderwater();
+        //testGrayScale();
+        testFixUnderwater();
         //testMirrorVertical();
         //testMirrorHorizontal();
         //testMirrorVerticalRightToLeft();
         //testMirrorHorizontalBotToTop();
         //testMirrorTemple();
-        testMirrorArms();
+        //testMirrorArms();
         //testMirrorGull();
         //testMirrorDiagonal();
         //testCollage();
