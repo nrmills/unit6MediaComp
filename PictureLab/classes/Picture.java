@@ -85,6 +85,32 @@ public class Picture extends SimplePicture
 
     }
 
+    // copies the region defined by rows 10-100 and columns 20-200 of picture1 into picture2
+    // such that the upper-left corner of the copied picture starts at row 30 and column 40
+    //(and, therefore, extends to row 120 and column 220).
+    //picture2.copy( picture1, 10, 100, 20, 200, 30, 40 );
+    public void copy( Picture initSourcePicture, int startSourceRow, int endSourceRow,
+    int startSourceCol, int endSourceCol, int startDestRow, int startDestCol )
+    {
+        //Initialize Pictures
+        Pixel[][] canvasPicture = this.getPixels2D();
+        Pixel[][] sourcePicture = initSourcePicture.getPixels2D();
+        int zeroCol = startSourceCol;
+        int sourceRow = startSourceRow;
+        int sourceCol = startSourceCol;
+        
+        //Copy sourcePicture onto canvasPicture
+        for( int row = startDestRow; row < startDestRow + ( endSourceRow - startSourceRow ); row++ )
+        {
+            for( int col = startDestCol; col < startDestCol + ( endSourceCol - startSourceCol ); col++ )
+            {
+                canvasPicture[row][col] = sourcePicture[startSourceRow][startSourceCol];
+                sourceCol++;
+            }
+            sourceRow++;
+        }
+    }
+
     public void grayScale()
     {
         Pixel[][] pixels = this.getPixels2D();
@@ -93,15 +119,14 @@ public class Picture extends SimplePicture
             for( Pixel pixelObj : rowArray )
             {
                 int avg = (pixelObj.getRed()+pixelObj.getGreen()+
-                    pixelObj.getBlue())/3;
+                        pixelObj.getBlue())/3;
                 pixelObj.setRed(avg);
                 pixelObj.setGreen(avg);
                 pixelObj.setBlue(avg);
             }
         }
     }
-        
-    
+
     public void negate()
     {
         Pixel[][] pixels = this.getPixels2D();
@@ -115,7 +140,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     public void fixUnderwater()
     {
         Pixel[][] pixels = this.getPixels2D();
@@ -129,7 +154,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     /** Method to set the blue to 0 */
     public void zeroBlue()
     {
@@ -142,7 +167,7 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
     public void keepOnlyBlue()
     {
         Pixel[][] pixels = this.getPixels2D();
@@ -255,7 +280,7 @@ public class Picture extends SimplePicture
         }
         System.out.println(count);
     }
-    
+
     public void mirrorArms()
     {
         //row start: 163
@@ -266,7 +291,7 @@ public class Picture extends SimplePicture
         Pixel topPixel = null;
         Pixel bottomPixel = null;
         Pixel[][] pixels = this.getPixels2D();
-        
+
         for( int row = 163; row < 205; row++ )
         {
             for( int col = 105; col < mirrorPoint; col++ )
