@@ -9,6 +9,22 @@
 public class PictureTester
 {
     
+    public static void testCrop()
+    {
+        Picture beach = new Picture("Beach.jpg");
+        Picture water = new Picture("water.jpg");
+        beach.crop( water, 10, 100, 20, 200, 30, 40 );
+        beach.explore();
+    }
+    
+    public static void testCopy()
+    {
+        Picture water = new Picture("water.jpg");
+        Picture beach = new Picture("Beach.jpg");
+        beach.copy( water, 10, 100, 20, 200, 30, 40 );
+        beach.explore();
+    }
+    
     public static void testGrayScale()
     {
         Picture beach = new Picture("beach.jpg");
@@ -123,13 +139,14 @@ public class PictureTester
         // uncomment a call here to run a test
         // and comment out the ones you don't want
         // to run
+        testCopy();
         //testZeroBlue();
         //testKeepOnlyBlue();
         //testKeepOnlyRed();
         //testKeepOnlyGreen();
         //testNegate();
         //testGrayScale();
-        testFixUnderwater();
+        //testFixUnderwater();
         //testMirrorVertical();
         //testMirrorHorizontal();
         //testMirrorVerticalRightToLeft();

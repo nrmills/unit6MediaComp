@@ -95,19 +95,56 @@ public class Picture extends SimplePicture
         //Initialize Pictures
         Pixel[][] canvasPicture = this.getPixels2D();
         Pixel[][] sourcePicture = initSourcePicture.getPixels2D();
-        int zeroCol = startSourceCol;
         int sourceRow = startSourceRow;
         int sourceCol = startSourceCol;
-        
+
         //Copy sourcePicture onto canvasPicture
         for( int row = startDestRow; row < startDestRow + ( endSourceRow - startSourceRow ); row++ )
         {
             for( int col = startDestCol; col < startDestCol + ( endSourceCol - startSourceCol ); col++ )
             {
-                canvasPicture[row][col] = sourcePicture[startSourceRow][startSourceCol];
+                canvasPicture[row][col].setColor( sourcePicture[sourceRow][sourceCol].getColor() );
                 sourceCol++;
             }
+            sourceCol = startSourceCol;
             sourceRow++;
+        }
+    }
+
+    public void crop( Picture initSourcePicture, int startSourceRow, int endSourceRow,
+    int startSourceCol, int endSourceCol, int startDestRow, int startDestCol )
+    {
+        //Initialize Pictures
+        Pixel[][] canvasPicture = this.getPixels2D();
+        Pixel[][] sourcePicture = initSourcePicture.getPixels2D();
+        Pixel[][] croppedPicture = new Pixel[sourcePicture.length/2][sourcePicture[0].length];
+        //Initialize variables to hold averages of red, green, blue values
+        int redVal = 0;
+        int greenVal = 0;
+        int blueVal = 0;
+
+        //crop sourcePicture
+        for( int row = 0; row < sourcePicture.length; row += 2 )
+        {
+            for( int col = 0; col < sourcePicture[0].length; col += 2 )
+            {
+                redVal = 0;
+                greenVal = 0;
+                blueVal = 0;
+                for( int microRow = row; microRow < 2; microRow++ )
+                {
+                    for( int microCol = col; microCol < 2; microCol++ )
+                    {
+                        redVal += sourcePicture[microRow][microCol].getRed();
+                        greenVal += sourcePicture[microRow][microCol].getGreen();
+                        blueVal += sourcePicture[microRow][microCol].getBlue();
+                    }
+                }
+                //assign average color values of 4 pixel grid
+                croppedPicture[row/2][col/2].setRed(redVal/4);
+                croppedPicture[row/2][col/2].setBlue(blueVal/4);
+                croppedPicture[row/2][col/2].setRed(greenVal/4);
+            }
         }
     }
 
