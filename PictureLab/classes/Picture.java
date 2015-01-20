@@ -84,7 +84,7 @@ public class Picture extends SimplePicture
         return output;
 
     }
-
+    
     // copies the region defined by rows 10-100 and columns 20-200 of picture1 into picture2
     // such that the upper-left corner of the copied picture starts at row 30 and column 40
     //(and, therefore, extends to row 120 and column 220).
@@ -111,42 +111,60 @@ public class Picture extends SimplePicture
         }
     }
 
-    public void crop( Picture initSourcePicture, int startSourceRow, int endSourceRow,
-    int startSourceCol, int endSourceCol, int startDestRow, int startDestCol )
+    public Picture scale()
     {
         //Initialize Pictures
         Pixel[][] canvasPicture = this.getPixels2D();
-        Pixel[][] sourcePicture = initSourcePicture.getPixels2D();
-        Pixel[][] croppedPicture = new Pixel[sourcePicture.length/2][sourcePicture[0].length];
+        Picture croppedPicture = new Picture((canvasPicture.length/2),((canvasPicture[0].length)/2));
+        Pixel[][] croppedPixels = croppedPicture.getPixels2D();
         //Initialize variables to hold averages of red, green, blue values
         int redVal = 0;
         int greenVal = 0;
         int blueVal = 0;
 
-        //crop sourcePicture
-        for( int row = 0; row < sourcePicture.length; row += 2 )
+        //scale canvasPicture
+        for( int row = 0; row < canvasPicture.length-1; row += 2 )
         {
-            for( int col = 0; col < sourcePicture[0].length; col += 2 )
+            for( int col = 0; col < canvasPicture[0].length-1; col += 2 )
             {
                 redVal = 0;
                 greenVal = 0;
                 blueVal = 0;
-                for( int microRow = row; microRow < 2; microRow++ )
+                for( int microRow = row; microRow < row + 2; microRow++ )
                 {
-                    for( int microCol = col; microCol < 2; microCol++ )
+                    for( int microCol = col; microCol < row + 2; microCol++ )
                     {
-                        redVal += sourcePicture[microRow][microCol].getRed();
-                        greenVal += sourcePicture[microRow][microCol].getGreen();
-                        blueVal += sourcePicture[microRow][microCol].getBlue();
+                        redVal += canvasPicture[microRow][microCol].getRed();
+                        greenVal += canvasPicture[microRow][microCol].getGreen();
+                        blueVal += canvasPicture[microRow][microCol].getBlue();
                     }
                 }
                 //assign average color values of 4 pixel grid
-                croppedPicture[row/2][col/2].setRed(redVal/4);
-                croppedPicture[row/2][col/2].setBlue(blueVal/4);
-                croppedPicture[row/2][col/2].setRed(greenVal/4);
+                croppedPixels[row/2][col/2].setRed(redVal/4);
+                croppedPixels[row/2][col/2].setBlue(blueVal/4);
+                croppedPixels[row/2][col/2].setGreen(greenVal/4);
             }
         }
+        
+        return croppedPicture;
     }
+    
+//     public void collage( Picture insertedPicture )
+//     {
+//         Pixel[][] canvas = this.getPixels2D();
+//         int pictureRow = 100;
+//         int pictureCol = 100;
+//         
+//         //copy elements into canvas
+//         for( int rows = 0; rows < 4; rows++ )
+//         {
+//             for( int cols = 0; cols < 4; cols++ )
+//             {
+//                 canvas[pictureRow][pictureCol] = insertedPicture[][]
+//             }
+//         }
+//         
+//     }
 
     public void grayScale()
     {

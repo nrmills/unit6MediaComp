@@ -9,12 +9,12 @@
 public class PictureTester
 {
     
-    public static void testCrop()
+    public static void testScale()
     {
         Picture beach = new Picture("Beach.jpg");
-        Picture water = new Picture("water.jpg");
-        beach.crop( water, 10, 100, 20, 200, 30, 40 );
-        beach.explore();
+
+        Picture scaledImage = beach.scale();
+        scaledImage.explore();
     }
     
     public static void testCopy()
@@ -139,7 +139,7 @@ public class PictureTester
         // uncomment a call here to run a test
         // and comment out the ones you don't want
         // to run
-        testCopy();
+        //testCrop();
         //testZeroBlue();
         //testKeepOnlyBlue();
         //testKeepOnlyRed();
