@@ -132,7 +132,7 @@ public class Picture extends SimplePicture
                 blueVal = 0;
                 for( int microRow = row; microRow < row + 2; microRow++ )
                 {
-                    for( int microCol = col; microCol < row + 2; microCol++ )
+                    for( int microCol = col; microCol < col + 2; microCol++ )
                     {
                         redVal += canvasPicture[microRow][microCol].getRed();
                         greenVal += canvasPicture[microRow][microCol].getGreen();
@@ -149,24 +149,7 @@ public class Picture extends SimplePicture
         return croppedPicture;
     }
     
-//     public void collage( Picture insertedPicture )
-//     {
-//         Pixel[][] canvas = this.getPixels2D();
-//         int pictureRow = 100;
-//         int pictureCol = 100;
-//         
-//         //copy elements into canvas
-//         for( int rows = 0; rows < 4; rows++ )
-//         {
-//             for( int cols = 0; cols < 4; cols++ )
-//             {
-//                 canvas[pictureRow][pictureCol] = insertedPicture[][]
-//             }
-//         }
-//         
-//     }
-
-    public void grayScale()
+    public void grayScale( int startRow, int startCol, int endRow, int endCol )
     {
         Pixel[][] pixels = this.getPixels2D();
         for( Pixel[] rowArray : pixels )
@@ -182,7 +165,7 @@ public class Picture extends SimplePicture
         }
     }
 
-    public void negate()
+    public void negate( int startRow, int startCol, int endRow, int endCol )
     {
         Pixel[][] pixels = this.getPixels2D();
         for( Pixel[] rowArray : pixels )
@@ -211,7 +194,7 @@ public class Picture extends SimplePicture
     }
 
     /** Method to set the blue to 0 */
-    public void zeroBlue()
+    public void zeroBlue( int startRow, int startCol, int endRow, int endCol )
     {
         Pixel[][] pixels = this.getPixels2D();
         for (Pixel[] rowArray : pixels)
@@ -222,8 +205,34 @@ public class Picture extends SimplePicture
             }
         }
     }
+    
+    /** Method to set the red to 0 */
+    public void zeroRed( int startRow, int startCol, int endRow, int endCol )
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                pixelObj.setRed(0);
+            }
+        }
+    }
+    
+    /** Method to set the green to 0 */
+    public void zeroGreen( int startRow, int startCol, int endRow, int endCol )
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels)
+        {
+            for (Pixel pixelObj : rowArray)
+            {
+                pixelObj.setGreen(0);
+            }
+        }
+    }
 
-    public void keepOnlyBlue()
+    public void keepOnlyBlue( int startRow, int startCol, int endRow, int endCol )
     {
         Pixel[][] pixels = this.getPixels2D();
         for( Pixel[] rowArray : pixels )
@@ -232,6 +241,32 @@ public class Picture extends SimplePicture
             {
                 pixelObj.setRed(0);
                 pixelObj.setGreen(0);
+            }
+        }
+    }
+    
+    public void keepOnlyRed( int startRow, int startCol, int endRow, int endCol )
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for( Pixel[] rowArray : pixels )
+        {
+            for( Pixel pixelObj : rowArray )
+            {
+                pixelObj.setBlue(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+    
+    public void keepOnlyGreen( int startRow, int startCol, int endRow, int endCol )
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for( Pixel[] rowArray : pixels )
+        {
+            for( Pixel pixelObj : rowArray )
+            {
+                pixelObj.setRed(0);
+                pixelObj.setBlue(0);
             }
         }
     }
