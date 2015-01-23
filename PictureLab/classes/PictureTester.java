@@ -66,6 +66,7 @@ public class PictureTester
 
         //Show Changes
         canvasPicture.explore();
+        canvasPicture.write("My Collage.jpg");
     }
 
     public static void testScale()
