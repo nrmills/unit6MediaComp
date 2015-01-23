@@ -14,7 +14,19 @@ public class PictureTester
         //Initialize canvas and inserted Picture
         Picture canvasPicture = new Picture((850),(875));
         Pixel[][] canvasPixels = canvasPicture.getPixels2D();
-        
+
+        //Black out canvas
+        for( int row = 0; row < 850; row++ )
+        {
+            for( int col = 0; col < 875; col++ )
+            {
+                canvasPixels[row][col].setRed(0);
+                canvasPixels[row][col].setGreen(0);
+                canvasPixels[row][col].setBlue(0);
+                
+            }
+        }
+
         Picture joker = new Picture("Joker.jpg");
         Picture scaledJoker = joker.scale();
         Pixel[][] jokerPixels = scaledJoker.getPixels2D();
@@ -37,12 +49,22 @@ public class PictureTester
                     25+shiftCol);
                 //Increment shiftRow
                 shiftRow += 240;
-                
+
             }
             //Increment shiftCol
             shiftCol += 500;
         }
-        
+        //First Column
+        canvasPicture.keepOnlyRed(25,25,265,325);
+        canvasPicture.keepOnlyGreen(265,25,505,325);
+        canvasPicture.keepOnlyBlue(505,25,745,325);
+
+        //Second Column
+        canvasPicture.grayScale(25,525,265,825);
+        canvasPicture.negate(265,525,505,825);
+        canvasPicture.mirrorVerticalRightToLeft(505,525,745,825);
+
+        //Show Changes
         canvasPicture.explore();
     }
 
@@ -66,7 +88,7 @@ public class PictureTester
     {
         Picture beach = new Picture("beach.jpg");
         beach.explore();
-        beach.grayScale();
+        beach.grayScale(0,0,200,200);
         beach.explore();
     }
 
@@ -74,7 +96,7 @@ public class PictureTester
     {
         Picture beach = new Picture("beach.jpg");
         beach.explore();
-        beach.negate();
+        beach.negate(0,0,200,200);
         beach.explore();
     }
 
@@ -91,7 +113,7 @@ public class PictureTester
     {
         Picture beach = new Picture("beach.jpg");
         beach.explore();
-        beach.zeroBlue();
+        beach.zeroBlue(0,0,200,200);
         beach.explore();
     }
 
@@ -99,7 +121,7 @@ public class PictureTester
     {
         Picture beach = new Picture("beach.jpg");
         beach.explore();
-        beach.keepOnlyBlue();
+        beach.keepOnlyBlue(0,0,200,200);
         beach.explore();
     }
 
@@ -107,7 +129,7 @@ public class PictureTester
     {
         Picture caterpillar = new Picture("caterpillar.jpg");
         caterpillar.explore();
-        caterpillar.mirrorVerticalRightToLeft();
+        //caterpillar.mirrorVerticalRightToLeft();
         caterpillar.explore();
     }
 
@@ -116,7 +138,7 @@ public class PictureTester
     {
         Picture caterpillar = new Picture("caterpillar.jpg");
         caterpillar.explore();
-        caterpillar.mirrorVertical();
+        //caterpillar.mirrorVertical();
         caterpillar.explore();
     }
 
